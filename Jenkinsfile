@@ -33,7 +33,7 @@ pipeline {
         stage('Deploy to Server') {
             steps {
                 script {
-                    withCredentials([sshUserPrivateKey(credentialsId: 'your-ssh-credentials-id', keyVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
+                    withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
                         bat """
                         ssh -o StrictHostKeyChecking=no %SSH_USER%@localhost '
                             docker pull husain7/bookstore:latest && \
