@@ -21,17 +21,6 @@
         <relativePath/>
     </parent>
 
-    <repositories>
-        <repository>
-            <id>central</id>
-            <url>https://repo.maven.apache.org/maven2</url>
-        </repository>
-        <repository>
-            <id>google-cloud-tools</id>
-            <url>https://repository.google.com</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <!-- Spring Boot Web Starter -->
         <dependency>
@@ -75,6 +64,7 @@
             <version>5.7.0</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>
@@ -86,42 +76,11 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
 
-            <!-- Maven Compiler Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
-
             <!-- Maven Versions Plugin: To check and update dependency versions -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>versions-maven-plugin</artifactId>
                 <version>2.8.1</version>
-            </plugin>
-
-            <!-- Jib Plugin for Docker Image Building -->
-            <plugin>
-                <groupId>com.google.cloud.tools</groupId>
-                <artifactId>jib-maven-plugin</artifactId>
-                <version>3.3.2</version>
-                <configuration>
-                    <from>
-                        <image>eclipse-temurin:17-jdk-alpine</image>
-                    </from>
-                    <to>
-                        <image>husain7/bookstore:latest</image> <!-- Replace with your username -->
-                    </to>
-                    <container>
-                        <ports>
-                            <port>8088</port>
-                        </ports>
-                    </container>
-                </configuration>
             </plugin>
         </plugins>
     </build>
