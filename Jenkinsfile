@@ -4,10 +4,17 @@ pipeline {
         maven 'M3'
     }
     stages {
-        stage('Build Maven') {
+        stage('Checkout SCM') {
             steps {
                 checkout scmGit(branches: [[name: '*/program_testing_project']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/AhmadDoobi/program_testing_project']])
-                bat "mvn -Dmaven.test.failure.ignore=true clean package"
+            }
+        }
+
+        stage('Build Maven') {
+            steps {
+                script {
+                    bat "mvn -Dmaven.test.failure.ignore=true clean package"
+                }
             }
         }
 
@@ -24,8 +31,8 @@ pipeline {
                 script {
                     withCredentials([string(credentialsId: 'Dockerhub', variable: 'Dockerhub')]) {
                         bat 'docker login -u husain7 -p %Dockerhub%'
+                        bat 'docker push husain7/bookstore:latest'
                     }
-                    bat 'docker push husain7/bookstore:latest'
                 }
             }
         }
@@ -35,16 +42,23 @@ pipeline {
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'SSH_USER', keyVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
                         bat """
-                        ssh -o StrictHostKeyChecking=no %SSH_USER%@localhost '
-                            docker pull husain7/bookstore:latest && \
-                            docker stop bookstore_container || true && \
-                            docker rm bookstore_container || true && \
-                            docker run -d --name bookstore_container -p 8080:8080 husain7/bookstore:latest
-                        '
+                        ssh -o StrictHostKeyChecking=no %SSH_USER%@localhost ^
+                            docker pull husain7/bookstore:latest ^ 
+                            && docker stop bookstore_container || true ^ 
+                            && docker rm bookstore_container || true ^ 
+                            && docker run -d --name bookstore_container -p 8080:8080 husain7/bookstore:latest
                         """
                     }
                 }
             }
+        }
+    }
+    post {
+        success {
+            echo 'Pipeline completed successfully.'
+        }
+        failure {
+            echo 'Pipeline failed.'
         }
     }
 }
