@@ -21,6 +21,17 @@
         <relativePath/>
     </parent>
 
+    <repositories>
+        <repository>
+            <id>central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+        <repository>
+            <id>google-cloud-tools</id>
+            <url>https://repository.google.com</url>
+        </repository>
+    </repositories>
+
     <dependencies>
         <!-- Spring Boot Web Starter -->
         <dependency>
@@ -103,7 +114,7 @@
                         <image>eclipse-temurin:17-jdk-alpine</image>
                     </from>
                     <to>
-                        <image>your-dockerhub-username/bookstore:latest</image>
+                        <image>husain7/bookstore:latest</image> <!-- Replace with your username -->
                     </to>
                     <container>
                         <ports>
