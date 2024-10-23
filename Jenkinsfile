@@ -3,9 +3,6 @@ pipeline {
     tools {
         maven 'M3'
     }
-    triggers {
-        pollSCM('* * * * *') // Optional: set up webhook for real-time triggering
-    }
     stages {
         stage('Source Code Checkout') {
             steps {
@@ -19,7 +16,6 @@ pipeline {
 
         stage('Build and Test') {
             steps {
-                // Ensure tests are run and logged properly
                 bat "mvn clean test package"
             }
         }
