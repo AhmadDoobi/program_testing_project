@@ -29,5 +29,14 @@ pipeline {
                 }
             }
         }
+
+        stage('Deploy to Server') {
+            steps {
+                script {
+                    bat 'docker pull husain7/bookstore:latest'
+                    bat 'docker run -d -p 8088:8088 --name bookstore husain7/bookstore:latest'
+                }
+            }
+        }
     }
 }
