@@ -3,15 +3,28 @@ pipeline {
     tools {
         maven 'M3'
     }
+    triggers {
+        pollSCM('* * * * *') // Optional: set up webhook for real-time triggering
+    }
     stages {
-        stage('Build Maven') {
+        stage('Source Code Checkout') {
             steps {
-                checkout scmGit(branches: [[name: '*/program_testing_project']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/AhmadDoobi/program_testing_project']])
-                bat "mvn -Dmaven.test.failure.ignore=true clean package"
+                checkout scmGit(
+                    branches: [[name: '*/program_testing_project']],
+                    extensions: [],
+                    userRemoteConfigs: [[url: 'https://github.com/AhmadDoobi/program_testing_project']]
+                )
             }
         }
 
-        stage('Build docker image') {
+        stage('Build and Test') {
+            steps {
+                // Ensure tests are run and logged properly
+                bat "mvn clean test package"
+            }
+        }
+
+        stage('Build Docker Image') {
             steps {
                 script {
                     bat 'docker build -t husain7/bookstore:latest .'
@@ -19,7 +32,7 @@ pipeline {
             }
         }
 
-        stage('Push image to Hub') {
+        stage('Push Image to Hub') {
             steps {
                 script {
                     withCredentials([string(credentialsId: 'Dockerhub', variable: 'Dockerhub')]) {
@@ -34,6 +47,8 @@ pipeline {
             steps {
                 script {
                     bat 'docker pull husain7/bookstore:latest'
+                    bat 'docker stop bookstore || true'
+                    bat 'docker rm bookstore || true'
                     bat 'docker run -d -p 8088:8088 --name bookstore husain7/bookstore:latest'
                 }
             }
