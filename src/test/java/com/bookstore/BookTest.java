@@ -19,7 +19,7 @@ class BookTest {
     }
 
     @Test
-    void testSetters() {
+    void testSetters() { 
         Book book = new Book();
         book.setId(2L);
         book.setTitle("Spring Framework");
