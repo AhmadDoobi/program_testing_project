@@ -50,4 +50,18 @@ pipeline {
             }
         }
     }
+    post {
+        success {
+            mail to: 'hl094539@gmail.com',
+                 subject: "SUCCESS: Build and Deployment Succeeded",
+                 body: "Good news! The Jenkins pipeline executed successfully and your project was deployed."
+            echo 'Build and deployment succeeded!'
+        }
+        failure {
+            mail to: 'hl094539@gmail.com',
+                 subject: "FAILURE: Build or Deployment Failed",
+                 body: "Unfortunately, the Jenkins pipeline failed. Please check the console output for more details."
+            echo 'Build or deployment failed.'
+        }
+    }
 }
