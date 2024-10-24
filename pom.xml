@@ -6,12 +6,12 @@
     <groupId>com.bookstore</groupId>
     <artifactId>bookstore</artifactId>
     <version>1.0.0</version>
-    <packaging>jar</packaging>
+    <packaging>jar</packaging>  <!-- Changed to JAR -->
 
     <name>Bookstore Application</name>
 
     <properties>
-        <java.version>21</java.version> <!-- Use Java 17 -->
+        <java.version>17</java.version>
     </properties>
 
     <parent>
@@ -34,7 +34,7 @@
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
 
-        <!-- JSTL 3.0 for Jakarta namespace -->
+        <!-- JSTL 3.0 (for Jakarta namespace, Tomcat 10 or higher) -->
         <dependency>
             <groupId>jakarta.servlet.jsp.jstl</groupId>
             <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
@@ -61,17 +61,6 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
-            <!-- Maven Compiler Plugin -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
             </plugin>
 
             <!-- Maven Versions Plugin: To check and update dependency versions -->
