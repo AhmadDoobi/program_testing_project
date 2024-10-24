@@ -6,12 +6,12 @@
     <groupId>com.bookstore</groupId>
     <artifactId>bookstore</artifactId>
     <version>1.0.0</version>
-    <packaging>jar</packaging>  <!-- Changed to JAR -->
+    <packaging>jar</packaging>
 
     <name>Bookstore Application</name>
 
     <properties>
-        <java.version>17</java.version>
+        <java.version>17</java.version> <!-- Use Java 17 -->
     </properties>
 
     <parent>
@@ -34,7 +34,7 @@
             <artifactId>tomcat-embed-jasper</artifactId>
         </dependency>
 
-        <!-- JSTL 3.0 (for Jakarta namespace, Tomcat 10 or higher) -->
+        <!-- JSTL 3.0 for Jakarta namespace -->
         <dependency>
             <groupId>jakarta.servlet.jsp.jstl</groupId>
             <artifactId>jakarta.servlet.jsp.jstl-api</artifactId>
@@ -67,7 +67,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.10.1</version> <!-- Latest stable version -->
+                <version>3.10.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
