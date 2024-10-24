@@ -9,7 +9,7 @@ pipeline {
                 checkout scmGit(
                     branches: [[name: '*/program_testing_project']],
                     extensions: [],
-                    userRemoteConfigs: [[url: 'https://github.com/AhmadDoobi/program_testing_project']]
+                    userRemoteConfigs: [[url: 'https://github.com/Husain70/program_testing_project']]
                 )
             }
         }
