@@ -6,7 +6,7 @@
     <groupId>com.bookstore</groupId>
     <artifactId>bookstore</artifactId>
     <version>1.0.0</version>
-    <packaging>jar</packaging>  <!-- Changed to JAR -->
+    <packaging>jar</packaging>  <!-- Changed to JAR --> 
 
     <name>Bookstore Application</name>
 
